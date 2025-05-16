@@ -114,3 +114,5 @@ backend:
       - port: 8888
         targetPort: 80
         protocol: TCP
+
+  additionalSecrets: []
