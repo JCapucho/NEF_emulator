@@ -42,4 +42,3 @@ data:
 
   #Report
   REPORT_PATH: "../shared/report.json"
-  

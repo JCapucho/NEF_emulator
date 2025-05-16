@@ -12,6 +12,10 @@ spec:
       labels:
         app: {{ .Release.Name }}-{{ .Values.postgres.name }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: {{ .Values.postgres.name }}
         image: {{ .Values.postgres.deployment.image }}

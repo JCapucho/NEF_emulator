@@ -12,6 +12,10 @@ spec:
       labels:
         app: {{ .Release.Name }}-{{ .Values.pgadmin.name }}
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - name: {{ .Values.pgadmin.name }}
         image: {{ .Values.pgadmin.deployment.image }}
