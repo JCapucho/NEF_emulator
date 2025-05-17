@@ -30,10 +30,12 @@ spec:
           {{- toYaml .Values.backend.deployment.ports | nindent 12 }}
         {{- end }}
         volumeMounts:
-          # - name: backend-app
-          #   mountPath: /app
           - name: shared-data
             mountPath: /shared
+          - name: qos-config
+            subPath: "qosCharacteristics.json"
+            mountPath: "/app/app/core/config/qosCharacteristics.json"
+            readOnly: true
         env:
           - name: SERVER_NAME
             valueFrom:
@@ -62,4 +64,7 @@ spec:
         - name: shared-data
           persistentVolumeClaim:
             claimName: shared-data
+        - name: qos-config
+          configMap:
+            name: {{ .Release.Name }}-{{ .Values.configName }}-qos
 {{- end }}

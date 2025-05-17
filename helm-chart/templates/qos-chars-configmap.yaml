@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.configName }}-qos
+data:
+  qosCharacteristics.json: |
+    {{- toJson .Values.qosConfig | nindent 4 }}
